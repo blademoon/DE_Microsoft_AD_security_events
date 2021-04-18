@@ -96,6 +96,9 @@ if __name__ == '__main__':
         p = Process(target=worker, name=("Worker " + str(core)))
         workers.append(p)
         p.start()
-    print("Waiting shutdows event...")
-    shutdown_event.wait()
-    print("Work process terminated due to receiving a shutdown event")
+
+    print("Waiting tasks executing...")
+
+    for worker in workers:
+        worker.join()
+

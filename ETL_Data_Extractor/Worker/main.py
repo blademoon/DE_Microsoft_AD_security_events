@@ -5,6 +5,7 @@ import logging
 import os
 import time
 import sys
+from Evtx_parser import *
 
 address = "127.0.0.1"
 port = 50001
@@ -49,14 +50,20 @@ def worker():
 
         task = work_queue.get()
 
-        # Здесь будет полезная нагрузка процесса
-
         if task is None:  # signal to terminate
             shutdown_event.set()
             work_queue.task_done()
             break
 
-        # Выполняем полезную работу
+        # Выполняем полученную задачу
+        logger.info("Starting the task processing: {}".format(task))
+
+        task_key = list(task.keys())[0]
+        result_file_full_path = task[task_key]["result_file_path"]
+        parse_evtx_file(task_key, result_file_full_path)
+
+        # Сообщаем в журнал о завершении обработки.
+        logger.info("Finishing the task processing: {}".format(task))
 
         # Отмечаем выполнение задачи.
         key = list(task.keys())[0]
@@ -66,7 +73,6 @@ def worker():
         work_queue.task_done()
         # logging.info("End of process code reached")
         # sys.exit(0)
-
 
 
 if __name__ == '__main__':
@@ -90,5 +96,6 @@ if __name__ == '__main__':
         p = Process(target=worker, name=("Worker " + str(core)))
         workers.append(p)
         p.start()
-
-        time.sleep(3)
+    print("Waiting shutdows event...")
+    shutdown_event.wait()
+    print("Work process terminated due to receiving a shutdown event")

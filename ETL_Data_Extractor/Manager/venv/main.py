@@ -5,8 +5,8 @@ import time
 # Менеджер очередей взаимодействующий с рабочими процессами будет отдельным потоком.
 # В основном потоке будем ваполнять очередь и отслеживать пояления событий.
 
-path_to_files = '.\\DATA\\*.evtx'
-path_to_results = '.\\RESULTS\\'
+path_to_files = 'C:\\Users\\Coursera\\Documents\\GitHub\\DE_Microsoft_AD_security_events\\ETL_Data_Extractor\\Manager\\DATA\\*.evtx'
+path_to_results = 'C:\\Users\\Coursera\\Documents\\GitHub\\DE_Microsoft_AD_security_events\\ETL_Data_Extractor\\Manager\\RESULTS\\'
 
 if __name__ == '__main__':
     started_event = Event()

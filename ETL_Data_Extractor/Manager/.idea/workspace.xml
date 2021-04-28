@@ -2,18 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d27c2f2-1dc4-466a-b31f-d4ae038d6062" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00124_output.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00158_output.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00342_output.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00391_output.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00632_output.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00711_output.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_0079_output.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00894_output.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00916_output.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00994_output.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESULTS/Microsoft Excel Worksheet.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-19_04_2021_0024_00_003_output.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-19_04_2021_0024_00_00458_output.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-19_04_2021_0024_00_00523_output.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-19_04_2021_0024_00_00534_output.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-19_04_2021_0024_00_00616_output.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-19_04_2021_0024_00_00696_output.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-19_04_2021_0024_00_00708_output.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-19_04_2021_0024_00_0089_output.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-19_04_2021_0024_00_00967_output.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-19_04_2021_0024_00_00988_output.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Worker/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Worker/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00124_output.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00158_output.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00342_output.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00391_output.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00632_output.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00711_output.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_0079_output.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00894_output.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00916_output.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RESULTS/NEF-DSK-1-18_04_2021_0024_00_00994_output.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Worker/Evtx_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Worker/Evtx_parser.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

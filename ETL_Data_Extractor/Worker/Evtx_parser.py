@@ -163,4 +163,4 @@ def parse_evtx_file(evtx_file_fullpath, result_file_fullpath):
     today = today.strftime("%d_%m_%Y_%H24_%M_%S")
 
     random_name = str(rnd.randrange(1000))
-    df.to_excel(result_file_fullpath + Computer_name + "-" + today + random_name + "_output.xlsx")
+    df.to_csv(result_file_fullpath + Computer_name + "-" + today + random_name + "_output.xlsx")

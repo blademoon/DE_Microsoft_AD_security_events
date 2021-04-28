@@ -35,7 +35,9 @@ sed -i 's/#max_parallel_maintenance_workers = 2/max_parallel_maintenance_workers
 read -p 'Lets set a password for POSTGRES user: ' pass
 command="ALTER USER postgres with encrypted password '$pass';"
 echo "Formed to execute the command: $command"
-sudo -u postgres psql template1 -c "$command"
+#sudo -u postgres psql template1 -c "$command"
+postgres psql template1 -c "$command"
+
 
 # Перезапустим сервер СУБД для вступления изменений в силу
 sudo systemctl restart postgresql.service
@@ -45,7 +47,15 @@ sudo systemctl restart postgresql.service
 curl -L https://www.pgadmin.org/static/packages_pgadmin_org.pub | apt-key add
 sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
 apt install pgadmin4-web
+export PGADMIN_PLATFORM_TYPE="debian"
 sh /usr/pgadmin4/bin/setup-web.sh
+
+# Конфигурационный файл pgadmin 4 находится по пути /usr/pgadmin4/web/config.py
+# Для того, чтобы он стал доступен по сети необходимо установить параметр DEFAULT_SERVER = '0.0.0.0'
+
+# Разрешим доступ к серверу из сети
+sed -i 's/host    all             all             127.0.0.1/32            md5/32            md5/host    all             all             0.0.0.0/0            md5/' /etc/postgresql/12/main/pg_hba.conf
+
 
 # Перезапустим сервер для вступления изменений в силу
 reboot

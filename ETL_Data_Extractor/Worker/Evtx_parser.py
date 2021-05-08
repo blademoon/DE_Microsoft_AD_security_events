@@ -1,4 +1,4 @@
-import Evtx.Evtx as evtx
+from evtx import PyEvtxParser
 import xml.etree.ElementTree as ET
 import pandas as pd
 from datetime import date
@@ -8,12 +8,14 @@ import random as rnd
 def get_event_4624(temp_system, temp_event_data):
     temp_dict = {"TimeCreated": "",
                  "EventID": temp_system.find('./{http://schemas.microsoft.com/win/2004/08/events/event}EventID').text,
-                 "Computer": temp_system.find('./{http://schemas.microsoft.com/win/2004/08/events/event}Computer').text,
+                 "Log_source": temp_system.find('./{http://schemas.microsoft.com/win/2004/08/events/event}Computer').text,
                  "TargetUserName": "",
                  "TargetDomainName": "",
                  "TargetLogonID": "",
                  "LogonType": "",
                  "LogonProcessName": "",
+                 "ProcessName": "",
+                 "ProcessId": "",
                  "IpAddress": "",
                  "IpPort": "",
                  "RestrictedAdminMode": ""}
@@ -39,6 +41,12 @@ def get_event_4624(temp_system, temp_event_data):
         if list(Data.attrib.values())[0] == "LogonProcessName":
             temp_dict["LogonProcessName"] = str(Data.text)
 
+        if list(Data.attrib.values())[0] == "ProcessName":
+            temp_dict["ProcessName"] = str(Data.text)
+
+        if list(Data.attrib.values())[0] == "ProcessId":
+            temp_dict["ProcessId"] = str(int(Data.text, 0))
+
         if list(Data.attrib.values())[0] == "IpAddress":
             temp_dict["IpAddress"] = str(Data.text)
 
@@ -54,7 +62,7 @@ def get_event_4624(temp_system, temp_event_data):
 def get_event_4634(temp_system, temp_event_data):
     temp_dict = {"TimeCreated": "",
                  "EventID": temp_system.find('./{http://schemas.microsoft.com/win/2004/08/events/event}EventID').text,
-                 "Computer": temp_system.find('./{http://schemas.microsoft.com/win/2004/08/events/event}Computer').text,
+                 "Log_source": temp_system.find('./{http://schemas.microsoft.com/win/2004/08/events/event}Computer').text,
                  "TargetUserName": "",
                  "TargetDomainName": "",
                  "TargetLogonID": "",
@@ -87,7 +95,7 @@ def get_event_4634(temp_system, temp_event_data):
 def get_event_4647(temp_system, temp_event_data):
     temp_dict = {"TimeCreated": "",
                  "EventID": temp_system.find('./{http://schemas.microsoft.com/win/2004/08/events/event}EventID').text,
-                 "Computer": temp_system.find('./{http://schemas.microsoft.com/win/2004/08/events/event}Computer').text,
+                 "Log_source": temp_system.find('./{http://schemas.microsoft.com/win/2004/08/events/event}Computer').text,
                  "TargetUserName": "",
                  "TargetDomainName": "",
                  "TargetLogonID": "",
@@ -116,51 +124,51 @@ def get_event_4647(temp_system, temp_event_data):
 
 def parse_evtx_file(evtx_file_fullpath, result_file_fullpath):
     # Имя сервера с которого был взят журнал
-    Computer_name = ""
+    Log_source = ""
 
-    # Датафрейм в который накапливаем информацию
+    # Датафрейм в который накапливаем информацию из логов
     df = pd.DataFrame()
 
-    # Откроем файл
-    with evtx.Evtx(evtx_file_fullpath) as log:
+    # Откроем файл логов в формате evtx и распарсим его
+    parser = PyEvtxParser(evtx_file_fullpath)
 
-        Events_signal = list(log.records())
+    for record in parser.records():
 
-        for record in Events_signal:
-            File = ET.fromstring(record.xml())
-            Event = list(File)
+        xml_event = ET.fromstring(record['data'])
+        event_elements = list(xml_event)
 
-            System = None
-            EventData = None
+        System = None
+        EventData = None
 
-            for Event in File:
-                if (Event.tag == "{http://schemas.microsoft.com/win/2004/08/events/event}System"):
-                    System = Event
-                elif (Event.tag == "{http://schemas.microsoft.com/win/2004/08/events/event}EventData"):
-                    EventData = Event
+        for event in event_elements:
+            if (event.tag == "{http://schemas.microsoft.com/win/2004/08/events/event}System"):
+                System = event
+            elif (event.tag == "{http://schemas.microsoft.com/win/2004/08/events/event}EventData"):
+                EventData = event
 
-            if Computer_name == "":
-                Computer_name = System.find('./{http://schemas.microsoft.com/win/2004/08/events/event}Computer').text
+        if Log_source == "":
+            Log_source = System.find('./{http://schemas.microsoft.com/win/2004/08/events/event}Computer').text
 
-            EventID = System.find('./{http://schemas.microsoft.com/win/2004/08/events/event}EventID').text
+        EventID = System.find('./{http://schemas.microsoft.com/win/2004/08/events/event}EventID').text
 
-            if EventID == "4624":
-                event = get_event_4624(System, EventData)
-                df = df.append(event, ignore_index=True)
+        if EventID == "4624":
+            event = get_event_4624(System, EventData)
+            df = df.append(event, ignore_index=True)
 
-            if EventID == "4634":
-                event = get_event_4634(System, EventData)
-                df = df.append(event, ignore_index=True)
+        if EventID == "4634":
+            event = get_event_4634(System, EventData)
+            df = df.append(event, ignore_index=True)
 
-            if EventID == "4647":
-                event = get_event_4647(System, EventData)
-                df = df.append(event, ignore_index=True)
+        if EventID == "4647":
+            event = get_event_4647(System, EventData)
+            df = df.append(event, ignore_index=True)
 
-            else:
-                continue
+        else:
+            continue
 
     today = date.today()
     today = today.strftime("%d_%m_%Y_%H24_%M_%S")
 
     random_name = str(rnd.randrange(1000))
-    df.to_csv(result_file_fullpath + Computer_name + "-" + today + random_name + "_output.xlsx", index=False)
+
+    df.to_csv(result_file_fullpath + Log_source + "-" + today + random_name + "_output.csv", index=False)

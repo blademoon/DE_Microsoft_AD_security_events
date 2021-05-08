@@ -84,7 +84,11 @@ if __name__ == '__main__':
     # p = Process(target=worker, name="Worker")
     # p.start()
     # p.join()
+    
+    # Засечем время испольнения скрипта
+    start_time = time.time()
 
+    # Кол-во процессов парсинга логов = кол-во ядер CPU. Оставим себе 1 ядро, чтобы не тормозил графический нитерфейс на сервере.
     process_count = cpu_count()
     workers = []
 
@@ -101,4 +105,7 @@ if __name__ == '__main__':
 
     for worker in workers:
         worker.join()
+    
+    # Выведем время выполнения скрипта
+    print("Profiling. The time taken to execute the script: {} seconds.".format(time.time() - start_time))
 

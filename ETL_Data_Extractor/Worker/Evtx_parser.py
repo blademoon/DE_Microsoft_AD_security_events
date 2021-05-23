@@ -4,11 +4,13 @@ import pandas as pd
 from datetime import date
 import random as rnd
 
+from File_operations import *
 
 def get_event_4624(temp_system, temp_event_data):
     temp_dict = {"TimeCreated": "",
                  "EventID": temp_system.find('./{http://schemas.microsoft.com/win/2004/08/events/event}EventID').text,
                  "Log_source": temp_system.find('./{http://schemas.microsoft.com/win/2004/08/events/event}Computer').text,
+                 "TargetUserSid": "",
                  "TargetUserName": "",
                  "TargetDomainName": "",
                  "TargetLogonID": "",
@@ -16,6 +18,7 @@ def get_event_4624(temp_system, temp_event_data):
                  "LogonProcessName": "",
                  "ProcessName": "",
                  "ProcessId": "",
+                 "WorkstationName": "",
                  "IpAddress": "",
                  "IpPort": "",
                  "RestrictedAdminMode": ""}
@@ -25,6 +28,9 @@ def get_event_4624(temp_system, temp_event_data):
     temp_dict["TimeCreated"] = TimeCreated.attrib['SystemTime']
 
     for Data in temp_event_data:
+
+        if list(Data.attrib.values())[0] == "TargetUserSid":
+            temp_dict["TargetUserSid"] = str(Data.text)
 
         if list(Data.attrib.values())[0] == "TargetUserName":
             temp_dict["TargetUserName"] = str(Data.text)
@@ -46,6 +52,9 @@ def get_event_4624(temp_system, temp_event_data):
 
         if list(Data.attrib.values())[0] == "ProcessId":
             temp_dict["ProcessId"] = str(int(Data.text, 0))
+
+        if list(Data.attrib.values())[0] == "WorkstationName":
+            temp_dict["WorkstationName"] = str(Data.text)
 
         if list(Data.attrib.values())[0] == "IpAddress":
             temp_dict["IpAddress"] = str(Data.text)
@@ -122,15 +131,22 @@ def get_event_4647(temp_system, temp_event_data):
     return temp_dict
 
 
-def parse_evtx_file(evtx_file_fullpath, result_file_fullpath):
+def parse_evtx_file(evtx_file_fullpath, result_file_fullpath, process_file_full_path):
     # Имя сервера с которого был взят журнал
     Log_source = ""
 
     # Датафрейм в который накапливаем информацию из логов
-    df = pd.DataFrame()
+    #df = pd.DataFrame()
+
+    df = pd.DataFrame(columns=['EventID', 'WorkstationName', 'IpAddress', 'IpPort', 'Log_source', 'LogonProcessName',
+                               'LogonType', 'ProcessId', 'ProcessName', 'RestrictedAdminMode', 'TargetDomainName',
+                               'TargetLogonID', 'TargetUserSid', 'TargetUserName', 'TimeCreated', 'evtx_file_name'])
 
     # Откроем файл логов в формате evtx и распарсим его
     parser = PyEvtxParser(evtx_file_fullpath)
+
+    # Получим имя текущего обрабатываемого файла
+    current_evtx_file_name = get_file_name(evtx_file_fullpath)
 
     for record in parser.records():
 
@@ -166,9 +182,9 @@ def parse_evtx_file(evtx_file_fullpath, result_file_fullpath):
         else:
             continue
 
-    today = date.today()
-    today = today.strftime("%d_%m_%Y_%H24_%M_%S")
+    df['evtx_file_name'] = current_evtx_file_name
 
-    random_name = str(rnd.randrange(1000))
+    df.to_csv(result_file_fullpath + Log_source + "_" + current_evtx_file_name + "_output.csv", index=False)
 
-    df.to_csv(result_file_fullpath + Log_source + "-" + today + random_name + "_output.csv", index=False)
+    # Архивируем обработанный журнал и перемещаем его в папку для хранения.
+    clean_up_processed_file(evtx_file_fullpath, process_file_full_path, Log_source)

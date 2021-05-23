@@ -9,7 +9,7 @@ def fill_main_tasks_list(path_to_files, path_to_result):
     temp_task_list = {}
 
     # Получим пути ко всем обрабатываемым файлам
-    processed_files = glob.glob(path_to_files)
+    processed_files = glob.glob(path_to_files, recursive=True)
 
     for file in processed_files:
         # Добавляем задачу в необходимом нам формате

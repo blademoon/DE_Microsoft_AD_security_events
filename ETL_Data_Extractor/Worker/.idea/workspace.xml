@@ -1,29 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="24eb0cd0-18bd-45e1-a682-5d62cf95cc28" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Manager/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Manager/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Manager/DATA/file00.evtx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Manager/DATA/file01.evtx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Manager/DATA/file02.evtx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Manager/DATA/file04.evtx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Manager/RESULTS/NEF-DSK-1-08_05_2021_0024_00_00407_output.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Manager/RESULTS/NEF-DSK-1-08_05_2021_0024_00_00640_output.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Manager/RESULTS/NEF-DSK-1-08_05_2021_0024_00_00728_output.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Manager/RESULTS/NEF-DSK-1-08_05_2021_0024_00_00904_output.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="a1302974-8cd1-436a-a364-ea17c4c13c7d" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
-  </component>
-  <component name="ProjectId" id="1sFspOMpTwiRqb2QnejsTQGxaOB" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1sO8IpZePC4HgGJLe2hfnfkT6au" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -32,7 +16,28 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="Evtx_parser" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Worker" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Evtx_parser.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Worker" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -54,16 +59,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.Evtx_parser" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="24eb0cd0-18bd-45e1-a682-5d62cf95cc28" name="Default Changelist" comment="" />
-      <created>1620479853928</created>
+      <changelist id="a1302974-8cd1-436a-a364-ea17c4c13c7d" name="Default Changelist" comment="" />
+      <created>1620732198984</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1620479853928</updated>
+      <updated>1620732198984</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>23</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

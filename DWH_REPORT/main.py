@@ -23,7 +23,7 @@ script_name = "DWH_REPORT_"
 today = date.today()
 # 0.1 OPEN LOG FILE. Откроем журнал.
 
-# Засечем время испольнения скрипта
+# Засечем время начала исполнения скрипта
 script_start_time = time.time()
 
 try:
@@ -86,7 +86,7 @@ AND duration > INTERVAL '{minutes} minute';
            ad_username=username,
            minutes=filtered_min_conn_interval)
 
-# Засечем время испольнения скрипта
+# Засечем время исполнения скрипта
 sql_start_time = time.time()
 
 try:

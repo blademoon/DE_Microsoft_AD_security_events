@@ -10,7 +10,7 @@ from Evtx_parser import *
 address = "127.0.0.1"
 port = 50001
 password = "secret"
-processed_files_path = '\\\\rni-10\\LogArchive\\'
+processed_files_path = '\\\\fileserver\\LogArchive\\'
 log_file_path = 'C:\\WORK\\ETL_Data_Extractor\\Worker\\LOGS\\'
 DEBUG = False
 

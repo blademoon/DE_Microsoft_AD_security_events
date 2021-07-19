@@ -13,8 +13,8 @@ username = 'BoykoAN'
 filtered_min_conn_interval = 2
 
 db_usrn = "postgres"
-db_usrn_pass = "sibintek19840705!@11"
-db_host = "10.228.11.193"
+db_usrn_pass = "pa$$word"
+db_host = "192.168.1.100"
 db_port = "5432"
 db_name = "win_evtx_logs"
 DEBUG = True

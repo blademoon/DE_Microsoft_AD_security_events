@@ -5,7 +5,7 @@ import time
 # Менеджер очередей взаимодействующий с рабочими процессами будет отдельным потоком.
 # В основном потоке будем ваполнять очередь и отслеживать пояления событий.
 
-#path_to_files = '\\\\rni-01\\SystemLogs\\SecurityLogsBackup\\**\\*.evtx'
+#path_to_files = '\\\\fileserver\\SystemLogs\\SecurityLogsBackup\\**\\*.evtx'
 path_to_files = 'C:\\TEMP\\SystemLogs\\SecurityLogsBackup\\**\\*.evtx'
 path_to_results = 'C:\\ETL_PROCESS\\DATA\\'
 

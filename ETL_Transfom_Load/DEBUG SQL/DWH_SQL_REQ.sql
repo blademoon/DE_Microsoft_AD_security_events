@@ -1,6 +1,7 @@
 # Загрузка информации из стейджинга в DWH
 # Отлажена, работает
 
+-- Загружаем из стейджинга в хранилище записи с ID 4624 (Прохождение аутентификации)
 INSERT INTO DWH_FACT_EVENT_4624
 SELECT
 	time_created::timestamp at time zone 'Etc/Zulu' as time_created,
@@ -28,41 +29,12 @@ SELECT
 FROM stg_eventlogs
 WHERE 1=1
 AND event_id = '4624'
-AND	target_user_name not like 'RC-%'
-AND	target_user_name not like 'RNI-%'
+AND	target_user_name not like 'PC-%'
 AND	target_user_name not like 'ANONYMOUS LOGON'
-AND	target_user_name not like 'NC-%'
-AND	target_user_name not ilike 'kipcdng%'
-AND	target_user_name not ilike 'ARMCXBZPPN-3'
-AND	target_user_name not ilike 'DezhCPP%'
-AND	target_user_name not like 'SYSTEM'
-AND	target_user_name not like 'DezhDNS%'
-AND	target_user_name not like 'SERVERFORADMINS$'
-AND	target_user_name not ilike 'MasterKip%'
-AND	target_user_name not ilike 'DezhASUcppn%'
-AND	target_user_name not ilike 'ArmCKSB'
-AND	target_user_name not ilike 'BrigadaKIPKSUgut'
-AND	target_user_name not ilike 'Uch_KSB'
-AND	target_user_name not ilike 'kipCSPTG%'
-AND	target_user_name not ilike 'KIPDNS%'
-AND	target_user_name not ilike 'EngineerKip%'
-AND	target_user_name not ilike 'Ingener_cksb'
-AND	target_user_name not ilike 'EnginePriobka'
-AND	target_user_name not ilike 'EngineerCKSB'
-AND	target_user_name not ilike 'TOiOUU'
-AND	target_user_name not ilike 'UtoKSB'
-AND	target_user_name not ilike 'NachKIPiAKS2'
-AND	target_user_name not ilike 'kipupgCSPTG4'
-AND	target_user_name not ilike 'DezhCDNG%'
-AND	target_user_name not ilike 'UTSMon'
-AND	target_user_name not ilike 'NachSmenCDS'
-AND	target_user_name not ilike 'kipCPPN%'
-AND target_user_name not ilike 'kipCSPTG%'
-AND target_user_name not ilike 'PriemnayaPytPU'
-AND target_user_name not ilike 'DezhASUupg'
-AND target_user_name not ilike 'netmonitor';
+AND	target_user_name not like 'SYSTEM';
+-- В последней части исключаем различный мусор (авторизации пользователя SYSTEM и служебные УЗ)
 
-
+-- Загружаем из стейджинга в хранилище записи с ID 4634 (завершение сессии пользователя)
 INSERT INTO DWH_FACT_EVENT_4634
 SELECT
 	time_created::timestamp at time zone 'Etc/Zulu' as time_created,
@@ -80,36 +52,7 @@ SELECT
 FROM stg_eventlogs
 WHERE 1=1
 AND event_id = '4634'
-AND	target_user_name not like 'RC-%'
-AND	target_user_name not like 'RNI-%'
+AND	target_user_name not like 'PC-%'
 AND	target_user_name not like 'ANONYMOUS LOGON'
-AND	target_user_name not like 'NC-%'
-AND	target_user_name not ilike 'kipcdng%'
-AND	target_user_name not ilike 'ARMCXBZPPN-3'
-AND	target_user_name not ilike 'DezhCPP%'
-AND	target_user_name not like 'SYSTEM'
-AND	target_user_name not like 'DezhDNS%'
-AND	target_user_name not like 'SERVERFORADMINS$'
-AND	target_user_name not ilike 'MasterKip%'
-AND	target_user_name not ilike 'DezhASUcppn%'
-AND	target_user_name not ilike 'ArmCKSB'
-AND	target_user_name not ilike 'BrigadaKIPKSUgut'
-AND	target_user_name not ilike 'Uch_KSB'
-AND	target_user_name not ilike 'kipCSPTG%'
-AND	target_user_name not ilike 'KIPDNS%'
-AND	target_user_name not ilike 'EngineerKip%'
-AND	target_user_name not ilike 'Ingener_cksb'
-AND	target_user_name not ilike 'EnginePriobka'
-AND	target_user_name not ilike 'EngineerCKSB'
-AND	target_user_name not ilike 'TOiOUU'
-AND	target_user_name not ilike 'UtoKSB'
-AND	target_user_name not ilike 'NachKIPiAKS2'
-AND	target_user_name not ilike 'kipupgCSPTG4'
-AND	target_user_name not ilike 'DezhCDNG%'
-AND	target_user_name not ilike 'UTSMon'
-AND	target_user_name not ilike 'NachSmenCDS'
-AND	target_user_name not ilike 'kipCPPN%'
-AND target_user_name not ilike 'kipCSPTG%'
-AND target_user_name not ilike 'PriemnayaPytPU'
-AND target_user_name not ilike 'DezhASUupg'
-AND target_user_name not ilike 'netmonitor';
+AND	target_user_name not like 'SYSTEM';
+-- В последней части исключаем различный мусор (авторизации пользователя SYSTEM и служебные УЗ)

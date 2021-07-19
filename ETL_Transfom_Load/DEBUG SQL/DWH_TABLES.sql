@@ -1,9 +1,11 @@
+-- Создаём базу данных
 CREATE DATABASE win_evtx_logs
     WITH
     OWNER = postgres
     ENCODING = 'UTF8'
     CONNECTION LIMIT = -1;
 
+-- Создаём стейджинг
 CREATE TABLE IF NOT EXISTS STG_EVENTLOGS (
 	event_id	text,
 	workstation_name	text,
@@ -23,6 +25,7 @@ CREATE TABLE IF NOT EXISTS STG_EVENTLOGS (
 	evtx_file_name	text
 );
 
+-- Создаём таблицу хранилища для фактов прохождения аутентификации (ID 4624)
 CREATE TABLE IF NOT EXISTS DWH_FACT_EVENT_4624 (
 time_created    timestamp with time zone,
 log_source	text,
@@ -42,6 +45,7 @@ target_logon_id text,
 evtx_file_name  text
 );
 
+-- Создаём таблицу хранилища для фактов завершения сессии (ID 4634)
 CREATE TABLE IF NOT EXISTS DWH_FACT_EVENT_4634 (
 time_created    timestamp with time zone,
 log_source	text,
@@ -51,13 +55,6 @@ target_domain_name	text,
 logon_type	numeric,
 target_logon_id text,
 evtx_file_name  text
-);
-
-# Неотлаженные запросы.
-
-
-CREATE TABLE IF NOT EXISTS DWH_FACT_EVENT_NNNN (
-
 );
 
 

@@ -10,8 +10,8 @@ from dwh_sql import *
 csv_files_path = "D:\\WORKSPACE\\DATA\\*.csv"
 csv_achive_folder = "D:\\WORKSPACE\\ETL_Transfom_Load\\ARCHIVE\\"
 db_usrn = "postgres"
-db_usrn_pass = "sibintek19840705!@11"
-db_host = "10.228.11.193"
+db_usrn_pass = "pa$$word"
+db_host = "192.168.1.100"
 db_port = "5432"
 db_name = "win_evtx_logs"
 DEBUG = True
@@ -53,7 +53,7 @@ except Exception as exc:
     logging.critical("0.2 CONNECT DWH: Exception occured: {} \n".format(exc))
     exit(1)
 
-# 0.3 FORMATING OF A LIST OF DATA FILES. Получим список всех имеющихся файлов
+# 0.3 FORMATING OF A LIST OF DATA FILES. Получим список всех имеющихся файлов csv в правильном хронологическом порядке.
 try:
     recursive_flg = True
     reverse_sort_flg = False
@@ -68,7 +68,6 @@ except Exception as exc:
     files_num = len(csv_files_ordered_list)
 
 for csv_file in csv_files_ordered_list:
-
     # 1. LOADING DATA FROM A FILE. Считаем текущий файл
     try:
         df = pd.read_csv(csv_file, sep=',', header=0)
@@ -81,8 +80,6 @@ for csv_file in csv_files_ordered_list:
 
     # Конвертируем все серии датафрейма в строковый тип
     df = df.astype(str)
-
-    # print(df)
 
     # 2. Загружаем данные в стейджинг
     sql_req = """
@@ -120,6 +117,7 @@ INSERT INTO stg_eventlogs (
 
     # 3. Извлекаем данные из стейджинга, фильтруем, трансформируем в нужный тип, загружаем в фактовые таблицы
     # хранилища данных.
+
     # 3.1 Заполняем таблицу фактов DWH_FACT_EVENT_4624
     try:
         sql_req = """
@@ -158,57 +156,9 @@ SELECT
 FROM stg_eventlogs
 WHERE 1=1
 AND event_id = '4624'
-AND	target_user_name NOT LIKE 'RC-%'
-AND	target_user_name NOT LIKE 'RNI-%'
+AND	target_user_name NOT LIKE 'PC-%'
 AND	target_user_name NOT LIKE 'ANONYMOUS LOGON'
-AND	target_user_name NOT LIKE 'NC-%'
-AND	target_user_name NOT ILIKE  'kipcdng%'
-AND	target_user_name NOT ILIKE  'ARMCXBZPPN-3'
-AND	target_user_name NOT ILIKE  'DezhCPP%'
-AND	target_user_name NOT LIKE 'SYSTEM'
-AND	target_user_name NOT LIKE 'DezhDNS%'
-AND	target_user_name NOT LIKE 'SERVERFORADMINS$'
-AND	target_user_name NOT ILIKE  'MASterKip%'
-AND	target_user_name NOT ILIKE  'DezhASUcppn%'
-AND	target_user_name NOT ILIKE  'ArmCKSB'
-AND	target_user_name NOT ILIKE  'BrigadaKIPKSUgut'
-AND	target_user_name NOT ILIKE  'Uch_KSB'
-AND	target_user_name NOT ILIKE  'kipCSPTG%'
-AND	target_user_name NOT ILIKE  'KIPDNS%'
-AND	target_user_name NOT ILIKE  'EngineerKip%'
-AND	target_user_name NOT ILIKE  'Ingener_cksb'
-AND	target_user_name NOT ILIKE  'EnginePriobka'
-AND	target_user_name NOT ILIKE  'EngineerCKSB'
-AND	target_user_name NOT ILIKE  'TOiOUU'
-AND	target_user_name NOT ILIKE  'UtoKSB'
-AND	target_user_name NOT ILIKE  'NachKIPiAKS2'
-AND	target_user_name NOT ILIKE  'kipupgCSPTG4'
-AND	target_user_name NOT ILIKE  'DezhCDNG%'
-AND	target_user_name NOT ILIKE  'UTSMon'
-AND	target_user_name NOT ILIKE  'NachSmenCDS'
-AND	target_user_name NOT ILIKE  'kipCPPN%'
-AND target_user_name NOT ILIKE  'kipCSPTG%'
-AND target_user_name NOT ILIKE  'PriemnayaPytPU'
-AND target_user_name NOT ILIKE  'DezhASUupg'
-AND target_user_name NOT ILIKE  'netmonitor'
-AND target_user_name NOT LIKE 'ats_cdng-14'
-AND target_user_name NOT LIKE 'configmgr2012'
-AND target_user_name NOT LIKE 'DESKTOP-HUQE3CI$'
-AND target_user_name NOT LIKE 'DezhurnijGKS1'
-AND target_user_name NOT LIKE 'Docsvision'
-AND target_user_name NOT LIKE 'DWM-12'
-AND target_user_name NOT LIKE 'InginerCAP5S'
-AND target_user_name NOT LIKE 'InzhenerKIP'
-AND target_user_name NOT LIKE 'Inzhener_metrologPR'
-AND target_user_name NOT LIKE 'kiuss_support'
-AND target_user_name NOT LIKE 'kscsib'
-AND target_user_name NOT LIKE 'LabEHOLOT'
-AND target_user_name NOT LIKE 'scomadmin'
-AND target_user_name NOT LIKE 'sps_ung'
-AND target_user_name NOT LIKE 'sql_sd'
-AND target_user_name NOT LIKE 'sql_spps'
-AND target_user_name NOT ILIKE 'ung-v7000%'
-AND target_user_name NOT LIKE 'UTSLeft';
+AND	target_user_name NOT LIKE 'SYSTEM';
 """
         dwh_cursor.execute(sql_req)
         logging.info("3.1 STG -> DWH: DWH_FACT_EVENT_4624 {} Successfully completed.".format(csv_file))
@@ -238,57 +188,9 @@ SELECT
 FROM stg_eventlogs
 WHERE 1=1
 AND event_id = '4634'
-AND	target_user_name NOT LIKE 'RC-%'
-AND	target_user_name NOT LIKE 'RNI-%'
+AND	target_user_name NOT LIKE 'PC-%'
 AND	target_user_name NOT LIKE 'ANONYMOUS LOGON'
-AND	target_user_name NOT LIKE 'NC-%'
-AND	target_user_name NOT ILIKE  'kipcdng%'
-AND	target_user_name NOT ILIKE  'ARMCXBZPPN-3'
-AND	target_user_name NOT ILIKE  'DezhCPP%'
-AND	target_user_name NOT LIKE 'SYSTEM'
-AND	target_user_name NOT LIKE 'DezhDNS%'
-AND	target_user_name NOT LIKE 'SERVERFORADMINS$'
-AND	target_user_name NOT ILIKE  'MASterKip%'
-AND	target_user_name NOT ILIKE  'DezhASUcppn%'
-AND	target_user_name NOT ILIKE  'ArmCKSB'
-AND	target_user_name NOT ILIKE  'BrigadaKIPKSUgut'
-AND	target_user_name NOT ILIKE  'Uch_KSB'
-AND	target_user_name NOT ILIKE  'kipCSPTG%'
-AND	target_user_name NOT ILIKE  'KIPDNS%'
-AND	target_user_name NOT ILIKE  'EngineerKip%'
-AND	target_user_name NOT ILIKE  'Ingener_cksb'
-AND	target_user_name NOT ILIKE  'EnginePriobka'
-AND	target_user_name NOT ILIKE  'EngineerCKSB'
-AND	target_user_name NOT ILIKE  'TOiOUU'
-AND	target_user_name NOT ILIKE  'UtoKSB'
-AND	target_user_name NOT ILIKE  'NachKIPiAKS2'
-AND	target_user_name NOT ILIKE  'kipupgCSPTG4'
-AND	target_user_name NOT ILIKE  'DezhCDNG%'
-AND	target_user_name NOT ILIKE  'UTSMon'
-AND	target_user_name NOT ILIKE  'NachSmenCDS'
-AND	target_user_name NOT ILIKE  'kipCPPN%'
-AND target_user_name NOT ILIKE  'kipCSPTG%'
-AND target_user_name NOT ILIKE  'PriemnayaPytPU'
-AND target_user_name NOT ILIKE  'DezhASUupg'
-AND target_user_name NOT ILIKE  'netmonitor'
-AND target_user_name NOT LIKE 'ats_cdng-14'
-AND target_user_name NOT LIKE 'configmgr2012'
-AND target_user_name NOT LIKE 'DESKTOP-HUQE3CI$'
-AND target_user_name NOT LIKE 'DezhurnijGKS1'
-AND target_user_name NOT LIKE 'Docsvision'
-AND target_user_name NOT LIKE 'DWM-12'
-AND target_user_name NOT LIKE 'InginerCAP5S'
-AND target_user_name NOT LIKE 'InzhenerKIP'
-AND target_user_name NOT LIKE 'Inzhener_metrologPR'
-AND target_user_name NOT LIKE 'kiuss_support'
-AND target_user_name NOT LIKE 'kscsib'
-AND target_user_name NOT LIKE 'LabEHOLOT'
-AND target_user_name NOT LIKE 'scomadmin'
-AND target_user_name NOT LIKE 'sps_ung'
-AND target_user_name NOT LIKE 'sql_sd'
-AND target_user_name NOT LIKE 'sql_spps'
-AND target_user_name NOT ILIKE 'ung-v7000%'
-AND target_user_name NOT LIKE 'UTSLeft';
+AND	target_user_name NOT LIKE 'SYSTEM';
 """
         dwh_cursor.execute(sql_req)
         logging.info("3.2 STG -> DWH: DWH_FACT_EVENT_4634 {} Data from staging was successfully transferred to the data "
